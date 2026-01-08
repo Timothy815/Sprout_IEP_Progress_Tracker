@@ -6,7 +6,6 @@
     <title>Sprout - IEP Tracker</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -30,6 +29,9 @@
             },
             boxShadow: {
               'soft': '0 4px 20px -2px rgba(74, 59, 50, 0.1)',
+            },
+            screens: {
+              'print': {'raw': 'print'},
             }
           }
         }
@@ -37,31 +39,42 @@
     </script>
     <style>
       @media print {
+        @page { 
+            margin: 0.5in; 
+            size: letter;
+        }
+        body { 
+            background: white; 
+            -webkit-print-color-adjust: exact !important; 
+            print-color-adjust: exact !important; 
+        }
         .no-print { display: none !important; }
         .print-only { display: block !important; }
-        body { background: white; }
+        
+        /* Ensure charts print clearly */
+        svg {
+            break-inside: avoid;
+        }
       }
       .print-only { display: none; }
     </style>
-  <script type="importmap">
+<script type="importmap">
 {
   "imports": {
-    "react": "https://esm.sh/react@18.3.1?dev",
-    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client?dev",
-    "react-dom": "https://esm.sh/react-dom@18.3.1?dev",
-    "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime?dev",
-    "lucide-react": "https://esm.sh/lucide-react@0.469.0?dev&external=react,react-dom",
-    "recharts": "https://esm.sh/recharts@2.12.7?dev&external=react,react-dom",
-    "clsx": "https://esm.sh/clsx@2.1.1?dev",
-    "react-markdown": "https://esm.sh/react-markdown@9?dev&external=react,react-dom",
-    "@google/genai": "https://esm.sh/@google/genai@0.1.1",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+    "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
 </head>
   <body class="bg-latte text-coffee-bean">
     <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>

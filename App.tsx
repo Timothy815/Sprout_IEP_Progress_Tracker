@@ -206,7 +206,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen font-sans bg-latte text-coffee-bean">
       <Navigation currentView={view} onChangeView={setView} />
-      <main className="mt-4">
+      <main className="mt-4 print:mt-0">
         {renderContent()}
       </main>
       
