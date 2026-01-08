@@ -1,3 +1,4 @@
+
 export interface DataPoint {
   id: string;
   objectiveId: string; // Renamed from goalId to reflect hierarchy
@@ -16,6 +17,7 @@ export interface Goal {
   description: string; // The main broad IEP goal text
   presentLevel: string; // Present Levels of Academic Achievement and Functional Performance
   createdAt: string;
+  reportObservation?: string; // Teacher's specific observations for this goal in the report
 }
 
 // The Measurable Child Item (formerly called Goal)
@@ -44,6 +46,7 @@ export interface Student {
   name: string;
   grade: string;
   teacher: string;
+  reportSummary?: string; // General teacher comments for the report
 }
 
 export interface AppState {

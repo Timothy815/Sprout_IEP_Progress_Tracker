@@ -12,6 +12,8 @@ interface GoalTrackerProps {
   dataPoints: DataPoint[];
   onBack: () => void;
   onAddGoal: (goal: Goal) => void;
+  onUpdateGoal: (goal: Goal) => void;
+  onUpdateStudent: (student: Student) => void;
   onDeleteGoal: (id: string) => void;
   onAddObjective: (obj: Objective) => void;
   onUpdateObjective: (obj: Objective) => void;
@@ -38,7 +40,7 @@ const COLORS = [
 
 const GoalTracker: React.FC<GoalTrackerProps> = ({ 
   student, goals, objectives, dataPoints, onBack, 
-  onAddGoal, onDeleteGoal, 
+  onAddGoal, onUpdateGoal, onUpdateStudent, onDeleteGoal, 
   onAddObjective, onUpdateObjective, onDeleteObjective,
   onAddDataPoint, onDeleteDataPoint
 }) => {
@@ -248,6 +250,8 @@ const GoalTracker: React.FC<GoalTrackerProps> = ({
         objectives={objectives} 
         dataPoints={dataPoints} 
         onBack={() => setActiveTab('GOALS')} 
+        onUpdateStudent={onUpdateStudent}
+        onUpdateGoal={onUpdateGoal}
       />
     );
   }

@@ -20,19 +20,46 @@ interface ReportGeneratorProps {
   objectives: Objective[];
   dataPoints: DataPoint[];
   onBack: () => void;
+  onUpdateStudent: (student: Student) => void;
+  onUpdateGoal: (goal: Goal) => void;
 }
 
-const ReportGenerator: React.FC<ReportGeneratorProps> = ({ student, goals, objectives, dataPoints, onBack }) => {
-  const [teacherComments, setTeacherComments] = useState(''); // General summary
-  const [goalComments, setGoalComments] = useState<Record<string, string>>({}); // Per-goal comments
+const ReportGenerator: React.FC<ReportGeneratorProps> = ({ student, goals, objectives, dataPoints, onBack, onUpdateStudent, onUpdateGoal }) => {
+  const [teacherComments, setTeacherComments] = useState(student.reportSummary || ''); 
+  
+  // Initialize goal comments from the passed goals. 
+  // Using a local state map for better performance while typing.
+  const [goalComments, setGoalComments] = useState<Record<string, string>>(() => {
+    const initial: Record<string, string> = {};
+    goals.forEach(g => {
+        if (g.reportObservation) initial[g.id] = g.reportObservation;
+    });
+    return initial;
+  });
+
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
-  const [hideEmptyObjectives, setHideEmptyObjectives] = useState(false); // New state for filtering
+  const [hideEmptyObjectives, setHideEmptyObjectives] = useState(false); 
 
   const handleGoalCommentChange = (goalId: string, text: string) => {
       setGoalComments(prev => ({
           ...prev,
           [goalId]: text
       }));
+  };
+
+  // Save on blur to avoid excessive re-renders/syncing while typing
+  const saveTeacherComments = () => {
+    if (teacherComments !== student.reportSummary) {
+        onUpdateStudent({ ...student, reportSummary: teacherComments });
+    }
+  };
+
+  const saveGoalComment = (goalId: string) => {
+    const comment = goalComments[goalId];
+    const goal = goals.find(g => g.id === goalId);
+    if (goal && comment !== goal.reportObservation) {
+        onUpdateGoal({ ...goal, reportObservation: comment });
+    }
   };
 
   const handleDownloadPDF = async () => {
@@ -118,6 +145,7 @@ const ReportGenerator: React.FC<ReportGeneratorProps> = ({ student, goals, objec
                 placeholder="Type overall summary observations here (e.g. attendance, behavior, general improvements)..."
                 value={teacherComments}
                 onChange={(e) => setTeacherComments(e.target.value)}
+                onBlur={saveTeacherComments}
              />
         </div>
 
@@ -241,6 +269,7 @@ const ReportGenerator: React.FC<ReportGeneratorProps> = ({ student, goals, objec
                                 placeholder={`Add specific notes on student progress regarding this goal...`}
                                 value={goalComments[goal.id] || ''}
                                 onChange={(e) => handleGoalCommentChange(goal.id, e.target.value)}
+                                onBlur={() => saveGoalComment(goal.id)}
                             />
                         </div>
                     </div>

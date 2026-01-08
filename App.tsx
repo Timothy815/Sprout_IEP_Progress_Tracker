@@ -44,6 +44,13 @@ const App: React.FC = () => {
     setData(prev => ({ ...prev, students: [...prev.students, student] }));
   };
 
+  const handleUpdateStudent = (updatedStudent: Student) => {
+    setData(prev => ({
+        ...prev,
+        students: prev.students.map(s => s.id === updatedStudent.id ? updatedStudent : s)
+    }));
+  };
+
   const handleDeleteStudent = (id: string) => {
     triggerConfirm(
         "This will permanently remove the student and ALL their goals and data. This cannot be undone.",
@@ -75,6 +82,13 @@ const App: React.FC = () => {
   // --- Goal (Parent) Actions ---
   const handleAddGoal = (goal: Goal) => {
     setData(prev => ({ ...prev, goals: [...prev.goals, goal] }));
+  };
+
+  const handleUpdateGoal = (updatedGoal: Goal) => {
+    setData(prev => ({
+        ...prev,
+        goals: prev.goals.map(g => g.id === updatedGoal.id ? updatedGoal : g)
+    }));
   };
 
   const handleDeleteGoal = (id: string) => {
@@ -174,6 +188,8 @@ const App: React.FC = () => {
           dataPoints={relevantDataPoints}
           onBack={() => setView('DASHBOARD')}
           onAddGoal={handleAddGoal}
+          onUpdateGoal={handleUpdateGoal}
+          onUpdateStudent={handleUpdateStudent}
           onDeleteGoal={handleDeleteGoal}
           onAddObjective={handleAddObjective}
           onUpdateObjective={handleUpdateObjective}
