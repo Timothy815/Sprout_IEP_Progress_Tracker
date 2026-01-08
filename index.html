@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sprout - IEP Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              friendly: ['"Roboto Slab"', 'serif'], // Updated for professional look
+            },
+            colors: {
+              'coffee-bean': '#4A3B32',   // Primary Text / Dark
+              'coffee-roast': '#8D6E63',  // Secondary Text
+              'coffee-light': '#D7CCC8',  // Borders / Accents
+              'latte': '#EFEBE9',         // Page Backgrounds
+              'cream': '#FFF8E1',         // Card Backgrounds
+              'tiffany': '#81D8D0',       // Primary Brand / Highlight
+              'matcha': '#C5E1A5',        // Success / Chart
+              'berry': '#F48FB1',         // Accents / Chart
+              'honey': '#FFE082',         // Accents / Chart
+              'sky': '#90CAF9',           // Accents / Chart
+              'paper': '#FAFAFA',         // White-ish
+            },
+            boxShadow: {
+              'soft': '0 4px 20px -2px rgba(74, 59, 50, 0.1)',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      @media print {
+        .no-print { display: none !important; }
+        .print-only { display: block !important; }
+        body { background: white; }
+      }
+      .print-only { display: none; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.3.1?dev",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client?dev",
+    "react-dom": "https://esm.sh/react-dom@18.3.1?dev",
+    "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime?dev",
+    "lucide-react": "https://esm.sh/lucide-react@0.469.0?dev&external=react,react-dom",
+    "recharts": "https://esm.sh/recharts@2.13.3?dev&external=react,react-dom",
+    "clsx": "https://esm.sh/clsx@2.1.1?dev",
+    "react-markdown": "https://esm.sh/react-markdown@9?dev&external=react,react-dom",
+    "@google/genai": "https://esm.sh/@google/genai@0.1.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+</head>
+  <body class="bg-latte text-coffee-bean">
+    <div id="root"></div>
+  </body>
+</html>
