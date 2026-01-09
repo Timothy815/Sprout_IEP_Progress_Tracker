@@ -106,7 +106,7 @@ const ReportGenerator: React.FC<ReportGeneratorProps> = ({ student, goals, objec
         {/* Decorative Top Border */}
         <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-coffee-roast via-tiffany to-matcha print:h-2"></div>
 
-        <div className="text-center mb-10 border-b-2 border-latte pb-8 print:mb-6 print:pb-4">
+        <div className="text-center mb-10 border-b-2 border-latte pb-8 print:mb-6 print:pb-4 print:pt-10">
             <h1 className="text-4xl font-friendly font-bold text-coffee-bean mb-2">IEP Progress Report</h1>
             <div className="flex justify-center items-center gap-2 text-coffee-roast">
                 <span>Prepared for the family of</span>
